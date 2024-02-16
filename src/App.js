@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { createRef, useRef, useState } from 'react';
 import './App.css';
 
 
@@ -62,41 +62,71 @@ import './App.css';
   
   // }
   
-  
-function App() {
-  const [list, setList] = useState([1, 2, 3, 4]);
-  const [str, setStr] = useState("");
+// useMemo
+// function App() {
+//   const [list, setList] = useState([1, 2, 3, 4]);
+//   const [str, setStr] = useState("");
 
   
-  const getAddResult = () => {
-    let sum =0;
-    list.forEach(i => sum = sum+i);
-    console.log("sum", sum);
-    return sum;
-  }
-  const addResult = useMemo(() => getAddResult(), [list]);
+//   const getAddResult = () => {
+//     let sum =0;
+//     list.forEach(i => sum = sum+i);
+//     console.log("sum", sum);
+//     return sum;
+//   }
+//   const addResult = useMemo(() => getAddResult(), [list]);
   
+//   return (
+//     <div>
+//       <button onClick={() => {
+//         setStr("안녕");
+//       }}>
+//         문자변경
+//       </button>
+//       <button onClick={() =>{
+//         setList([...list, 10]);
+//       }}>리스트값 추가</button>
+//       <div>
+//         {list.map(e => <h1>{e}</h1>)}
+//       </div>
+//       <div>
+//         {str}: {addResult}
+//       </div>
+//     </div>
+//   )
+// }
+  
+  
+// export default App;
+  
+
+
+// useRef 디자인
+// DOM 변경 시 사용
+function App() {
+
+  const myRef = useRef(null);
+  
+  const [list, setList] = useState([
+    {id: 1, name:"길동"},
+    {id: 2, name:"꺽정"}
+  ])
+
+  const myRefs = Array.from({length: list.length}).map(() => createRef());
+
   return (
     <div>
-      <button onClick={() => {
-        setStr("안녕");
-      }}>
-        문자변경
+      <button onClick={() => { 
+        console.log(myRef);
+        console.log(myRef.current);
+
+        myRefs[1].current.style.backgroundColor = 'red';}}>
+          색 변경
       </button>
-      <button onClick={() =>{
-        setList([...list, 10]);
-      }}>리스트값 추가</button>
-      <div>
-        {list.map(e => <h1>{e}</h1>)}
-      </div>
-      <div>
-        {str}: {addResult}
-      </div>
+      <div ref={myRef}>박스</div>
+      {list.map((user, index) => <h1 ref={myRefs[index]}>{user.name}</h1>)}
     </div>
   )
 }
-  
-  
-export default App;
-  
 
+export default App
