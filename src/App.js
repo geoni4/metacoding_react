@@ -1,5 +1,6 @@
-import React, { createRef, useRef, useState } from 'react';
+import React from 'react';
 import './App.css';
+import LoginPage from './pages/LoginPage';
 
 
 // 1. lifecycle
@@ -101,32 +102,52 @@ import './App.css';
   
 
 
-// useRef 디자인
-// DOM 변경 시 사용
-function App() {
+// // useRef 디자인
+// // DOM 변경 시 사용
+// function App() {
 
-  const myRef = useRef(null);
+//   const myRef = useRef(null);
   
-  const [list, setList] = useState([
-    {id: 1, name:"길동"},
-    {id: 2, name:"꺽정"}
-  ])
+//   const [list, setList] = useState([
+//     {id: 1, name:"길동"},
+//     {id: 2, name:"꺽정"}
+//   ])
 
-  const myRefs = Array.from({length: list.length}).map(() => createRef());
+//   const myRefs = Array.from({length: list.length}).map(() => createRef());
 
+//   return (
+//     <div>
+//       <button onClick={() => { 
+//         console.log(myRef);
+//         console.log(myRef.current);
+
+//         myRefs[1].current.style.backgroundColor = 'red';}}>
+//           색 변경
+//       </button>
+//       <div ref={myRef}>박스</div>
+//       {list.map((user, index) => <h1 ref={myRefs[index]}>{user.name}</h1>)}
+//     </div>
+//   )
+// }
+
+let t = document.createElement("h1");
+
+t = {
+  fontSize: "1.5em",
+  textAlign: "center",
+  color: "palevioletred"
+}
+
+
+function App() {
   return (
     <div>
-      <button onClick={() => { 
-        console.log(myRef);
-        console.log(myRef.current);
-
-        myRefs[1].current.style.backgroundColor = 'red';}}>
-          색 변경
-      </button>
-      <div ref={myRef}>박스</div>
-      {list.map((user, index) => <h1 ref={myRefs[index]}>{user.name}</h1>)}
+      <LoginPage />
     </div>
   )
 }
 
-export default App
+
+
+
+export default App;

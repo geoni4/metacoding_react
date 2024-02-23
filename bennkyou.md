@@ -28,3 +28,13 @@
     3. 의존 리스트를 관리할 수 있다.
 
 # useMemo()
+
+
+# useRef()
+
+
+
+# Styled-Component
+  - const Title = styled.div``; 이런 문법
+  - ``안에 css문법 그대로 사용 가능
+  - component화를 하기 때문에 클래스화 하는 것처럼 나눠서 작성하기 편함
